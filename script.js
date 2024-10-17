@@ -59,19 +59,34 @@ let gtfsRealtimeSchema;
 
 function loadProtobufSchema() {
     return new Promise((resolve, reject) => {
-        protobuf.load("https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto", function(err, root) {
-            if (err) reject(err);
-            gtfsRealtimeSchema = root;
-            resolve();
-        });
+        fetch('/playground.io/gtfs-realtime-schema.txt')
+            .then(response => response.text())
+            .then(schemaText => {
+                protobuf.parse(schemaText, (err, root) => {
+                    if (err) {
+                        console.error("Error parsing protobuf schema:", err);
+                        reject(err);
+                    } else {
+                        console.log("Protobuf schema parsed successfully");
+                        gtfsRealtimeSchema = root;
+                        resolve();
+                    }
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching protobuf schema:", error);
+                reject(error);
+            });
     });
 }
 
 async function getSubwaySchedule() {
+    const subwayScheduleDiv = document.getElementById('subway-schedule');
+    subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
+
     try {
         await loadProtobufSchema();
-        const subwayScheduleDiv = document.getElementById('subway-schedule');
-        subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
+        console.log("Schema loaded, fetching subway data...");
 
         let allArrivals = [];
         for (const feed of subwayFeeds) {
@@ -133,8 +148,8 @@ async function getSubwaySchedule() {
 
         subwayScheduleDiv.innerHTML = scheduleHtml;
     } catch (error) {
+        console.error('Error in getSubwaySchedule:', error);
         subwayScheduleDiv.innerHTML = 'Error loading subway schedule. Please try again later.';
-        console.error('Error fetching subway schedule:', error);
     }
 }
 
