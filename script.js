@@ -68,13 +68,10 @@ function loadProtobufSchema() {
 }
 
 async function getSubwaySchedule() {
-    const subwayScheduleDiv = document.getElementById('subway-schedule');
-    subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
-
     try {
-        if (!gtfsRealtimeSchema) {
-            await loadProtobufSchema();
-        }
+        await loadProtobufSchema();
+        const subwayScheduleDiv = document.getElementById('subway-schedule');
+        subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
 
         let allArrivals = [];
         for (const feed of subwayFeeds) {
