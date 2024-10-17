@@ -287,14 +287,15 @@ function updatePageTitle() {
 }
 
 function initializeApp() {
+    console.log("Initializing app...");
     updatePageTitle();
     getSubwaySchedule();
     getWeatherData();
-    getFunFact();  // Added this line
+    getFunFact();
     // Set up automatic updates
     setInterval(getSubwaySchedule, 60000);
     setInterval(getWeatherData, 1800000);
-    setInterval(getFunFact, 86400000);  // Added this line
+    setInterval(getFunFact, 86400000);
 
     const updateButton = document.getElementById('update-schedule');
     if (updateButton) {
