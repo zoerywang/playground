@@ -58,27 +58,19 @@ function getDirection(stopId) {
 let gtfsRealtimeSchema;
 
 function loadProtobufSchema() {
-    const url = "gtfs-realtime-schema.txt";
+    const url = "https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto";
     console.log("Loading protobuf schema from:", url);
     return new Promise((resolve, reject) => {
-        fetch(url)
-            .then(response => response.text())
-            .then(schemaText => {
-                protobuf.parse(schemaText, (err, root) => {
-                    if (err) {
-                        console.error("Error parsing protobuf schema:", err);
-                        reject(err);
-                    } else {
-                        console.log("Protobuf schema loaded and parsed successfully");
-                        gtfsRealtimeSchema = root;
-                        resolve();
-                    }
-                });
-            })
-            .catch(error => {
-                console.error("Error fetching protobuf schema:", error);
-                reject(error);
-            });
+        protobuf.load(url, function(err, root) {
+            if (err) {
+                console.error("Error loading protobuf schema:", err);
+                reject(err);
+            } else {
+                console.log("Protobuf schema loaded successfully");
+                gtfsRealtimeSchema = root;
+                resolve();
+            }
+        });
     });
 }
 
@@ -287,15 +279,14 @@ function updatePageTitle() {
 }
 
 function initializeApp() {
-    console.log("Initializing app...");
     updatePageTitle();
     getSubwaySchedule();
     getWeatherData();
-    getFunFact();
+    getFunFact();  // Added this line
     // Set up automatic updates
     setInterval(getSubwaySchedule, 60000);
     setInterval(getWeatherData, 1800000);
-    setInterval(getFunFact, 86400000);
+    setInterval(getFunFact, 86400000);  // Added this line
 
     const updateButton = document.getElementById('update-schedule');
     if (updateButton) {
