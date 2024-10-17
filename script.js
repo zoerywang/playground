@@ -254,8 +254,8 @@ function getLineSVG(line) {
     };
     const color = colors[line] || '#000000';
     return `
-        <svg class="subway-icon" width="28" height="28" viewBox="0 0 30 30">
-            <circle cx="15" cy="15" r="14" fill="${color}"/>
+        <svg class="subway-icon" width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="15" fill="${color}"/>
             <text x="15" y="20" font-size="16" fill="white" text-anchor="middle">${line}</text>
         </svg>
     `;
