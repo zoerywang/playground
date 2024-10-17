@@ -58,19 +58,27 @@ function getDirection(stopId) {
 let gtfsRealtimeSchema;
 
 function loadProtobufSchema() {
-    const url = "https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto";
+    const url = "gtfs-realtime-schema.txt";
     console.log("Loading protobuf schema from:", url);
     return new Promise((resolve, reject) => {
-        protobuf.load(url, function(err, root) {
-            if (err) {
-                console.error("Error loading protobuf schema:", err);
-                reject(err);
-            } else {
-                console.log("Protobuf schema loaded successfully");
-                gtfsRealtimeSchema = root;
-                resolve();
-            }
-        });
+        fetch(url)
+            .then(response => response.text())
+            .then(schemaText => {
+                protobuf.parse(schemaText, (err, root) => {
+                    if (err) {
+                        console.error("Error parsing protobuf schema:", err);
+                        reject(err);
+                    } else {
+                        console.log("Protobuf schema loaded and parsed successfully");
+                        gtfsRealtimeSchema = root;
+                        resolve();
+                    }
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching protobuf schema:", error);
+                reject(error);
+            });
     });
 }
 
