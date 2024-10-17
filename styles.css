@@ -1,0 +1,266 @@
+html, body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+}
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+}
+
+header {
+    background-color: #ffbff9;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+    background-color: #ffffff;
+}
+
+section {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    padding: 1rem;
+    width: 45%;
+}
+
+h2 {
+    color: #0039a6;
+}
+
+.subway-line {
+    margin-bottom: 10px;
+}
+
+.subway-line input[type="text"] {
+    margin-left: 10px;
+    width: 200px;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+#weather-info {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.weather-main {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.weather-main h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.weather-current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.weather-current .temperature {
+    font-size: 72px;
+    font-weight: 200;
+    margin-right: 10px;
+}
+
+.weather-current .weather-icon {
+    font-size: 48px;
+}
+
+.weather-description {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.high-low {
+    font-size: 16px;
+}
+
+.weather-hourly {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.hourly-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    min-width: 50px;
+}
+
+.hourly-item .hour {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.hourly-item .icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.hourly-item .temp {
+    font-size: 16px;
+}
+
+#fun-fact {
+    width: 360px;
+    height: 150px;
+    overflow-y: auto;
+    background-color: #ffffff; /* Light grey color, adjust if needed */
+    border-radius: 8px; /* To match the rounded corners of other sections */
+    padding: 15px; /* Add some padding to match other sections */
+    margin-top: 20px; /* Add some space above the fun fact section */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adjust values to match other sections */
+}
+
+#fun-fact h2 {
+    margin-top: 0;
+    color: #0039a6; /* Blue color to match other section headers */
+    margin-bottom: 10px; /* Add some space below the header */
+}
+
+#fun-fact-content {
+    font-style: italic;
+    color: #333; /* Dark grey for the text content */
+}
+
+#main-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1160px; /* 1200px - 40px for body padding */
+    margin: 0 auto;
+    padding: 0 15px; /* Adds some padding on the sides of the content */
+    gap: 30px; /* Adds space between sections */
+    background-color: #ffffff;
+}
+
+#subway {
+    flex: 0 0 360px; /* Fixed width of 360px */
+    width: 360px;
+    overflow-y: auto; /* In case content is too tall */
+}
+
+#side-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between weather and fun fact */
+}
+
+#weather {
+    width: 360px;
+    height: 550px;
+    overflow-y: auto;
+}
+
+/* Ensure content fits within the sections */
+#subway-schedule, #weather-info, #fun-fact-content {
+    max-width: 100%;
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.subway-icon {
+    margin-right: -8px; /* Slight negative margin */
+    position: relative; /* Enable z-index */
+    z-index: 1; /* Ensure icons stack correctly */
+}
+
+.subway-icon:hover {
+    z-index: 2; /* Bring hovered icon to front */
+}
+
+/* Remove negative margin from the last icon */
+.subway-icon:last-child {
+    margin-right: 0;
+}
+
+.subway-group {
+    margin-bottom: 20px;
+}
+
+.subway-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.subway-item {
+    margin-bottom: 5px;
+}
+
+.subway-1 {
+    background-color: #EE352E;
+}
+
+.subway-2 {
+    background-color: #EE352E;
+}
+
+.subway-3 {
+    background-color: #EE352E;
+}
+
+/* Add more subway line colors as needed */
+
+.subway-line h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.subway-info {
+    flex: 1;
+}
+
+.container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-fluid {
+    background-color: #ffffff;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5rem; /* Increase this value to make it bigger */
+    font-weight: bold; /* Optional: makes the text bolder */
+}
+
+#weather h2 {
+    color: white;
+}
