@@ -88,13 +88,11 @@ function loadProtobufSchema() {
 }
 
 async function getSubwaySchedule() {
-    const subwayScheduleDiv = document.getElementById('subway-schedule');
-    subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
-
     try {
-        if (!gtfsRealtimeSchema) {
-            await loadProtobufSchema();
-        }
+        await loadProtobufSchema();
+        console.log("Protobuf schema loaded successfully");
+        const subwayScheduleDiv = document.getElementById('subway-schedule');
+        subwayScheduleDiv.innerHTML = 'Loading subway schedule...';
 
         let allArrivals = [];
         for (const feed of subwayFeeds) {
@@ -284,7 +282,7 @@ function getLineSVG(line) {
 function updatePageTitle() {
     const pageTitleElement = document.getElementById('page-title');
     if (pageTitleElement) {
-        pageTitleElement.textContent = "Zoe's Cheat Sheet";
+        pageTitleElement.textContent = "Zoe's Playground";
     } else {
         console.warn("Element with id 'page-title' not found");
     }
@@ -292,14 +290,15 @@ function updatePageTitle() {
 }
 
 function initializeApp() {
+    console.log("Initializing app...");
     updatePageTitle();
     getSubwaySchedule();
     getWeatherData();
-    getFunFact();  // Added this line
+    getFunFact();
     // Set up automatic updates
     setInterval(getSubwaySchedule, 60000);
     setInterval(getWeatherData, 1800000);
-    setInterval(getFunFact, 86400000);  // Added this line
+    setInterval(getFunFact, 86400000);
 
     const updateButton = document.getElementById('update-schedule');
     if (updateButton) {
@@ -317,6 +316,7 @@ if (document.readyState === 'loading') {
 }
 
 async function getWeatherData() {
+    console.log("Fetching weather data...");
     const lat = 40.7128;
     const lon = -74.0060;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weathercode&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&current_weather=true&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&forecast_hours=24`;
@@ -477,6 +477,7 @@ function getWeatherDescription(weatherCode) {
 window.onload = getWeatherData;
 
 async function getFunFact() {
+    console.log("Fetching fun fact...");
     const funFactDiv = document.getElementById('fun-fact-content');
     try {
         const response = await fetch('https://uselessfacts.jsph.pl/random.json?language=en');
