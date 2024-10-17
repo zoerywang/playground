@@ -29,6 +29,10 @@ jobs:
         run: |
           curl -o gtfs-realtime-schema.txt https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto
       
+      - name: Modify protobuf.js
+        run: |
+          sed -i 's|https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto|gtfs-realtime-schema.txt|g' protobuf.js
+      
       - name: Add timestamp to script.js
         run: |
           echo "// Last updated: $(date)" >> script.js
